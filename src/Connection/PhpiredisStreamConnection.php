@@ -125,10 +125,9 @@ class PhpiredisStreamConnection extends StreamConnection
         $timeout = (isset($parameters->timeout) ? (float) $parameters->timeout : 5.0);
         $context = stream_context_create();
 
-        $errorReporting = error_reporting();
-        error_reporting($errorReporting ^ E_WARNING);
+        set_error_handler(function(){return true;});
         $resource = @stream_socket_client($address, $errno, $errstr, $timeout, $flags, $context);
-        error_reporting($errorReporting);
+        restore_error_handler();
 
         if (!$resource) {
             $this->onConnectionError(trim($errstr), $errno);
