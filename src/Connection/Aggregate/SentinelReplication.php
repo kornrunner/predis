@@ -104,7 +104,7 @@ class SentinelReplication implements ReplicationInterface
      *
      * @var bool
      */
-    protected $updateSentinels = false;
+    protected $updateSentinels = true;
 
     /**
      * @param string                     $service           Name of the service for autodiscovery.
